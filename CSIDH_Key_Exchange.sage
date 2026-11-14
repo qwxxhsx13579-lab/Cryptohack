@@ -29,7 +29,7 @@ def walk(s_key,E,p):
             for _ in range(-e):
                 P=l_Point(l,Et,p)
                 Et=Et.isogeny(P).codomain()
-        E = Et.quadratic_twist(2)
+            E = Et.quadratic_twist(2)
      
     return E             
 print("hhh")
@@ -37,3 +37,16 @@ Ea=walk(a_priv,E0,p)#print(Ea)
 Eb=walk(b_priv,E0,p)
 print(walk(b_priv, Ea, p).is_isomorphic(walk(a_priv, Eb, p)))
 Eab=walk(b_priv,Ea,p);M=Eab.montgomery_model();print(M.a2()/M.a4())
+"""from Crypto.Cipher import AES
+from Crypto.Hash import SHA256
+from Crypto.Util.Padding import unpad
+shared_secret = 3535872301824536828474148022891087211908124858372657462170957663778447515208455309139232037575345742373769128664931019679705493779439643552226146830087512
+print(len(str(shared_secret)))
+def decrypt(shared_secret):
+    L=('daf6cd181775664b099609789fb564c9', '3dd92e255c8e677f4a92226d09f56e2b2f567052ffd4f6f60200018454a83affc2e694c2bf2ad27da38f7f49b6e89928')
+    iv,ct=bytes.fromhex(L[0]),bytes.fromhex(L[1])
+    key = SHA256.new(data=str(shared_secret).encode()).digest()[:128]
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    pt = cipher.decrypt(ct)
+    return unpad(pt, 16)
+print(decrypt(shared_secret))  """
